@@ -1,0 +1,88 @@
+---
+title: "lab_2"
+author: "Xiangning Dong"
+date: "2022/10/19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Function 1
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+
+DRG_data <- read.csv("DRG_data.csv")
+# colnames(DRG_data)
+
+boxplot_DRG <- function(col_name){
+  if(col_name == "Average.Medicare.Payments"){
+      DRG_data %>% 
+      ggplot(aes(x = DRG.Definition, y = Average.Medicare.Payments, fill = DRG.Definition))+
+      geom_boxplot()+
+      labs(x = "DRG code", y = "Average Medicare Payments", title = "Box Plot of Average Medicare Payments")+
+      theme(plot.title = element_text(hjust = 0.5,size = 15),
+            legend.position = "none")  
+  }else if(col_name == "Average.Total.Payment"){
+      DRG_data %>% 
+      ggplot(aes(x = DRG.Definition, y = Average.Total.Payment, fill = DRG.Definition))+
+      geom_boxplot()+
+      labs(x = "Average Total Payment", y = "Average Total Payment", title = "Box Plot of Average Total Payment")+
+      theme(plot.title = element_text(hjust = 0.5,size = 15),
+            legend.position = "none")
+  }else if(col_name == "Average.Covered.Charges"){
+      DRG_data %>% 
+      ggplot(aes(x = DRG.Definition, y = Average.Covered.Charges, fill = DRG.Definition))+
+      geom_boxplot()+
+      labs(x = "Average.Covered.Charges", y = "Average Covered Charges", title = "Box Plot of Average Covered Payment")+
+      theme(plot.title = element_text(hjust = 0.5,size = 15),
+            legend.position = "none")
+  }
+}
+
+
+```
+
+```{r message=FALSE}
+boxplot_DRG("Average.Medicare.Payments")
+
+```
+
+
+# Function 2
+```{r}
+calculates_statistics <- function(statistics){
+   if(statistics == "mean"){
+      DRG_data %>% 
+        group_by(DRG.Definition) %>% 
+        summarise(mean = mean(Average.Medicare.Payments))
+      
+   }else if(statistics == "median"){
+     DRG_data %>% 
+        group_by(DRG.Definition) %>% 
+        summarise(median = median(Average.Medicare.Payments))
+     
+   }else if(statistics == "standard deviation"){
+     DRG_data %>% 
+        group_by(DRG.Definition) %>% 
+        summarise(sd = sd(Average.Medicare.Payments))
+   }
+}
+
+```
+
+```{r}
+calculates_statistics("mean")
+
+```
+
+
+
+
+
+
+
+
+
