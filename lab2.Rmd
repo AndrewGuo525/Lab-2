@@ -61,7 +61,7 @@ boxplot_pmt('Average_Medicare_Payments')
 
 ```
 
-
+ 
 # Function 2
 ```{r}
 calculates_statistics <- function(statistics){
