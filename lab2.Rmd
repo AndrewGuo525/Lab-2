@@ -25,6 +25,7 @@ drg <- drg %>%
 
 # create a function makes a boxplot of payments by DRG code
 boxplot_pmt <- function(pmt) {
+  # give the option when the payment is the average covered charges
   if (pmt == 'Average_Covered_Charges') {
     ggplot(drg, aes(x = DRG_Code, y = Average_Covered_Charges, fill = DRG_Code)) +
       geom_boxplot() +
@@ -33,6 +34,7 @@ boxplot_pmt <- function(pmt) {
            y = 'Average Covered Charges') +
       theme_minimal() +
       theme(axis.text.x = element_text(size = 5, angle = 90), legend.position = "none")
+  # give the option when the payment is the average total payments
   }else if (pmt == 'Average_Total_Payments') {
     ggplot(drg, aes(x = DRG_Code, y = Average_Total_Payments, fill =  DRG_Code)) +
       geom_boxplot() +
@@ -41,6 +43,7 @@ boxplot_pmt <- function(pmt) {
            y = 'Average Total Payments') +
       theme_minimal() +
       theme(axis.text.x = element_text(size = 5, angle = 90), legend.position = "none")
+  # give the option when the payment is the average medicare payments
   }else if (pmt == 'Average_Medicare_Payments') {
     options(repr.plot.width = 2, repr.plot.height =3)
     ggplot(drg, aes(x = DRG_Code, y = Average_Medicare_Payments, fill = DRG_Code)) +
@@ -50,13 +53,16 @@ boxplot_pmt <- function(pmt) {
            y = 'Average Medicare Payments') +
       theme_minimal() +
       theme(axis.text.x = element_text(size = 5, angle = 90), legend.position = "none")
+  # give a warning when the name does not match with the options
   } else {
     print('Wrong Name')
   }
 
 }
 
-# show the graphs
+# show the graph of each option
+boxplot_pmt('Average_Covered_Charges')
+boxplot_pmt('Average_Total_Payments')
 boxplot_pmt('Average_Medicare_Payments')
 
 ```
