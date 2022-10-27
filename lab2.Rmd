@@ -19,7 +19,7 @@ drg <- read_csv('DRG_data.csv')
 
 # tidy the name
 names(drg) <- gsub(" ", "_", names(drg))
-drg
+
 drg <- drg %>%
   mutate(DRG_Code = substr(DRG_Definition, 0, 3))
 
