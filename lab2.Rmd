@@ -1,8 +1,11 @@
 ---
-title: "lab_2"
-author: "Xiangning Dong"
-date: "2022/10/19"
-output: html_document
+title: "Lab2"
+author: "Xiangning Dong, Jiayi Guo, Yinglin Dai"
+date: "Due: Oct 31, 2022"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -67,35 +70,36 @@ map(c('Average_Covered_Charges', 'Average_Total_Payments', 'Average_Medicare_Pay
 
  
 # Function 2
+
 ```{r}
-## Define a mailBox funcion with an argument of option which could be Mean, Median or sd.
+# Define a mailBox funcion with an argument of option which could be Mean, Median or sd.
 makeBox <- function(option){
   if(option == "Mean"){
-    ## If choose to calculate the mean
+    # If choose to calculate the mean
     DRG_data %>%
-      ## group with same DRG Code
+      # group with same DRG Code
            group_by(DRG.Definition) %>%
-      ## Calculate its mean and form a table
+      # Calculate its mean and form a table
            summarise(mean(Average.Medicare.Payments))
   }
   else if(option == "Median"){
-    ## If choose to calculate the median
+    # If choose to calculate the median
     DRG_data %>%
-      ## group with same DRG Code
+      # group with same DRG Code
            group_by(DRG.Definition) %>%
-      ## Calculate its mean and form a table
+      # Calculate its mean and form a table
            summarise(median(Average.Medicare.Payments))
   }
   else{
-    ## If choose to calculate the sd
+    # If choose to calculate the sd
     DRG_data %>%
-      ## group with same DRG Code
+      # group with same DRG Code
            group_by(DRG.Definition) %>%
-      ## Calculate its mean and form a table
+      # Calculate its mean and form a table
            summarise(sd(Average.Medicare.Payments))
   }
 }
-## Use map function to form three tables at a time
+# Use map function to form three tables at a time
 map(c("Mean", "Median", "Sd"), makeBox)
 ```
 
