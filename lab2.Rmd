@@ -95,10 +95,6 @@ makeBox <- function(option){
 map(c("Mean", "Median", "Sd"), makeBox)
 ```
 
-```{r}
-calculates_statistics("mean")
-
-```
 
 
 
