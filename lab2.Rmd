@@ -64,24 +64,35 @@ boxplot_pmt('Average_Medicare_Payments')
 
 # Function 2
 ```{r}
-calculates_statistics <- function(statistics){
-   if(statistics == "mean"){
-      DRG_data %>% 
-        group_by(DRG.Definition) %>% 
-        summarise(mean = mean(Average.Medicare.Payments))
-      
-   }else if(statistics == "median"){
-     DRG_data %>% 
-        group_by(DRG.Definition) %>% 
-        summarise(median = median(Average.Medicare.Payments))
-     
-   }else if(statistics == "standard deviation"){
-     DRG_data %>% 
-        group_by(DRG.Definition) %>% 
-        summarise(sd = sd(Average.Medicare.Payments))
-   }
+## Define a mailBox funcion with an argument of option which could be Mean, Median or sd.
+makeBox <- function(option){
+  if(option == "Mean"){
+    ## If choose to calculate the mean
+    DRG_data %>%
+      ## group with same DRG Code
+           group_by(DRG.Definition) %>%
+      ## Calculate its mean and form a table
+           summarise(mean(Average.Medicare.Payments))
+  }
+  else if(option == "Median"){
+    ## If choose to calculate the median
+    DRG_data %>%
+      ## group with same DRG Code
+           group_by(DRG.Definition) %>%
+      ## Calculate its mean and form a table
+           summarise(median(Average.Medicare.Payments))
+  }
+  else{
+    ## If choose to calculate the sd
+    DRG_data %>%
+      ## group with same DRG Code
+           group_by(DRG.Definition) %>%
+      ## Calculate its mean and form a table
+           summarise(sd(Average.Medicare.Payments))
+  }
 }
-
+## Use map function to form three tables at a time
+map(c("Mean", "Median", "Sd"), makeBox)
 ```
 
 ```{r}
