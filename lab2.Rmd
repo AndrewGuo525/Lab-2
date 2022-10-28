@@ -27,6 +27,7 @@ drg <- drg %>%
   mutate(DRG_Code = substr(DRG_Definition, 0, 3))
 
 # create a function makes a boxplot of payments by DRG code
+
 boxplot_pmt <- function(pmt) {
   # give the option when the payment is the average covered charges
   if (pmt == 'Average_Covered_Charges') {
