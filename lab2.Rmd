@@ -101,34 +101,40 @@ map(c('Average_Covered_Charges', 'Average_Total_Payments', 'Average_Medicare_Pay
 makeBox <- function(option){
   if(option == "Mean"){
     # If choose to calculate the mean
-    DRG_data %>%
+    drg %>%
       # group with same DRG Code
-           group_by(DRG.Definition) %>%
+           group_by(DRG_Definition) %>%
       # Calculate its mean and form a table
-           summarise(mean(Average.Medicare.Payments))
+           summarise(mean(Average_Medicare_Payments))
   }
   else if(option == "Median"){
     # If choose to calculate the median
-    DRG_data %>%
+    drg %>%
       # group with same DRG Code
-           group_by(DRG.Definition) %>%
+           group_by(DRG_Definition) %>%
       # Calculate its mean and form a table
-           summarise(median(Average.Medicare.Payments))
+           summarise(median(Average_Medicare_Payments))
   }
   else{
     # If choose to calculate the sd
-    DRG_data %>%
+    drg %>%
       # group with same DRG Code
-           group_by(DRG.Definition) %>%
+           group_by(DRG_Definition) %>%
       # Calculate its mean and form a table
-           summarise(sd(Average.Medicare.Payments))
+           summarise(sd(Average_Medicare_Payments))
   }
 }
 # Use map function to form three tables at a time
 map(c("Mean", "Median", "Sd"), makeBox)
 ```
 
+# Save the data in the package
 
+```{r}
+setwd('..')
+save(drg, file = 'Lab2_Group9/data/DRG_data.RData')
+
+```
 
 
 
