@@ -27,6 +27,20 @@ drg <- drg %>%
   mutate(DRG_Code = substr(DRG_Definition, 0, 3))
 
 # create a function makes a boxplot of payments by DRG code
+#' Title
+#'
+#' @param pmt A payment category in  Medicare Severity Diagnosis Related Group data (DRG data)
+#'
+#' @return A boxplot of payments by DRG code
+#' @export
+#' 
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_boxplot
+#' @importFrom tidyverse
+#' 
+#' @examples
+#' boxplot_pmt('Average_Covered_Charges')
+#'
 
 boxplot_pmt <- function(pmt) {
   # give the option when the payment is the average covered charges
@@ -74,6 +88,16 @@ map(c('Average_Covered_Charges', 'Average_Total_Payments', 'Average_Medicare_Pay
 
 ```{r}
 # Define a mailBox funcion with an argument of option which could be Mean, Median or sd.
+#' Title
+#'
+#' @param option A statistics (mean, median, or standard deviation) that is required to be calculated  
+#'
+#' @return A mean, median, or standard deviation of average Medicare payments
+#' @export
+#'
+#' @importFrom tidyverse
+#' @examples makeBox("Mean")
+
 makeBox <- function(option){
   if(option == "Mean"){
     # If choose to calculate the mean
